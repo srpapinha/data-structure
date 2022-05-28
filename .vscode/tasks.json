@@ -8,8 +8,9 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "Stack/stack.c",
-                "LinkedList/LinkedList.c",
+                "-I",
+                "include",
+                "src/*.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
