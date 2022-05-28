@@ -95,7 +95,7 @@ int main(void) {
     testStack();
     testLinkedList();
     testQueue();
-    //testQuicksort();
+    testQuicksort();
     testMergesort();
     printf("END\n");
     system("pause");

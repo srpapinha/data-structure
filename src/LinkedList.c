@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+#include "linkedlist.h"
 
 Node * initNode(Node * previous, Node * next, int data) {
     Node * node = (Node*) malloc(sizeof(Node));
