@@ -4,6 +4,7 @@
 #include <Stack.h>
 #include <LinkedList.h>
 #include <Queue.h>
+#include <Sort.h>
 
 void testStack() {
     Stack * stack = initStack(3);
@@ -60,10 +61,43 @@ void testQueue() {
     queue_destroy(queue);
 }
 
+void testQuicksort() {
+    int array[] = {7, 4, 2, 8, 1, 0, 3, 5, 9, 6};
+    quicksort(array, 0, 9);
+    assert(array[0] == 0);
+    assert(array[1] == 1);
+    assert(array[2] == 2);
+    assert(array[3] == 3);
+    assert(array[4] == 4);
+    assert(array[5] == 5);
+    assert(array[6] == 6);
+    assert(array[7] == 7);
+    assert(array[8] == 8);
+    assert(array[9] == 9);
+}
+
+void testMergesort() {
+    int array[] = {7, 4, 2, 8, 1, 0, 3, 5, 9, 6};
+    mergesort(array, 0, 9);
+    assert(array[0] == 0);
+    assert(array[1] == 1);
+    assert(array[2] == 2);
+    assert(array[3] == 3);
+    assert(array[4] == 4);
+    assert(array[5] == 5);
+    assert(array[6] == 6);
+    assert(array[7] == 7);
+    assert(array[8] == 8);
+    assert(array[9] == 9);
+}
+
 int main(void) {
     testStack();
     testLinkedList();
     testQueue();
+    //testQuicksort();
+    testMergesort();
     printf("END\n");
+    system("pause");
     return 0;
 }
