@@ -1,64 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <Stack.h>
-#include <LinkedList.h>
-#include <Queue.h>
-#include <Sort.h>
-
-void testStack() {
-    Stack * stack = initStack(3);
-    assert(stack_is_empty(stack));
-    
-    stack_push(stack, 10);
-    stack_push(stack, 20);
-    stack_push(stack, 30);
-    assert(stack_is_full(stack));
-    assert(stack_peek(stack) == 30);
-    assert(stack_pop(stack) == 30);
-
-    stack_destroy(stack);
-}
+#include <linkedlist.h>
+#include <sort.h>
 
 void testLinkedList() {
+    int array[] = {10, 20, 30, 40, 50};
     LinkedList * list = initLinkedList();
 
-    linkedlist_add(list, 10);
-    linkedlist_add(list, 20);
-    linkedlist_add(list, 30);
-    linkedlist_add(list, 40);
-    linkedlist_add(list, 50);
-    assert(linkedlist_get(list, 0) == 10);
-    assert(linkedlist_get(list, 2) == 30);
-    assert(linkedlist_get(list, 4) == 50);
+    linkedlist_add(list, &array[0]);
+    linkedlist_add(list, &array[1]);
+    linkedlist_add(list, &array[2]);
+    linkedlist_add(list, &array[3]);
+    linkedlist_add(list, &array[4]);
+    assert(*(int*) linkedlist_get(list, 0) == array[0]);
+    assert(*(int*) linkedlist_get(list, 2) == array[2]);
+    assert(*(int*) linkedlist_get(list, 4) == array[4]);
 
     linkedlist_remove(list, 0);
     linkedlist_remove(list, 1);
     linkedlist_remove(list, 2);
-    assert(linkedlist_get(list, 0) == 20);
-    assert(linkedlist_get(list, 1) == 40);
+    assert(*(int*) linkedlist_get(list, 0) == array[1]);
+    assert(*(int*) linkedlist_get(list, 1) == array[3]);
+
+    linkedlist_push(list, &array[1]);
+    linkedlist_push(list, &array[2]);
+    linkedlist_push(list, &array[4]);
+    assert(*(int*) linkedlist_pop(list) == array[4]);
+    assert(*(int*) linkedlist_pop(list) == array[2]);
+    assert(*(int*) linkedlist_pop(list) == array[1]);
+
+    assert(*(int*) linkedlist_dequeue(list) == array[1]);
+    assert(*(int*) linkedlist_dequeue(list) == array[3]);
 
     linkedlist_destroy(list);
-}
-
-void testQueue() {
-    Queue * queue = initQueue(5);
-    assert(queue_is_empty(queue));
-    assert(queue_enqueue(queue, 10));
-    assert(queue_enqueue(queue, 20));
-    assert(queue_enqueue(queue, 30));
-    assert(queue_enqueue(queue, 40));
-    assert(queue_enqueue(queue, 50));
-    assert(queue_enqueue(queue, 60) == 0);
-    assert(queue_is_full(queue));
-    assert(queue_dequeue(queue) == 10);
-    assert(queue_dequeue(queue) == 20);
-    assert(queue_dequeue(queue) == 30);
-    assert(queue_dequeue(queue) == 40);
-    assert(queue_dequeue(queue) == 50);
-    assert(queue_dequeue(queue) == INT_MIN);
-
-    queue_destroy(queue);
 }
 
 void testQuicksort() {
@@ -92,12 +67,11 @@ void testMergesort() {
 }
 
 int main(void) {
-    testStack();
     testLinkedList();
-    testQueue();
+    /*
     testQuicksort();
     testMergesort();
+    */
     printf("END\n");
-    system("pause");
     return 0;
 }

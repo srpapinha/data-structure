@@ -1,18 +1,13 @@
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
 
-#ifndef _LIMITS_H___
-#include <limits.h>
-#endif
-
-#ifndef _INC_STDLIB
 #include <stdlib.h>
-#endif
+#include <limits.h>
 
 typedef struct Node {
     struct Node * previous;
     struct Node * next;
-    int data;
+    void * data;
 } Node;
 
 typedef struct LinkedList {
@@ -21,11 +16,17 @@ typedef struct LinkedList {
     int size;
 } LinkedList;
 
-Node * initNode(Node * previous, Node * next, int data);
 LinkedList * initLinkedList(void);
-void linkedlist_add(LinkedList * list, int data);
+Node * initNode(Node * previous, Node * next, void * data);
+void linkedlist_add(LinkedList * list, void * data);
 Node * linkedlist_node(LinkedList * list, int index);
-int linkedlist_get(LinkedList * list, int index);
-void linkedlist_remove(LinkedList * list, int index);
+void * linkedlist_get(LinkedList * list, int index);
+void * linkedlist_remove(LinkedList * list, int index);
+void linkedlist_push(LinkedList * list, void * data);
+void * linkedlist_pop(LinkedList * list);
+void * linkedlist_peek(LinkedList * list);
+void linkedlist_enqueue(LinkedList * list, void * data);
+void * linkedlist_dequeue(LinkedList * list);
+void * linkedlist_head(LinkedList * list);
 void linkedlist_destroy(LinkedList * list);
 #endif
